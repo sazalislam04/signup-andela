@@ -1,9 +1,13 @@
 import React from "react";
+import Form from "./Form";
 
 const Signup = () => {
   return (
-    <div>
-      <h2>sign up</h2>
+    <div className="w-10/12 px-3 mx-auto">
+      <div className="">
+        <span className="bg-yellow-500">1</span>
+      </div>
+      <Form />
     </div>
   );
 };
