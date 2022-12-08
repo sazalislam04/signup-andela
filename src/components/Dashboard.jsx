@@ -7,19 +7,19 @@ const Dashboard = () => {
     <>
       <div className="min-h-screen">
         <div className="p-4 w-96 bg-[#173c40]">
-          <div className="w-48 mx-auto">
-            <div className="mt-16">
-              <img className="w-full" src={logo} alt="" />
+          <div className="max-w-sm mx-auto">
+            <div className="w-48 mx-auto mt-16">
+              <img className="" src={logo} alt="" />
             </div>
-            <div className="mt-8">
+            <div className="max-w-xs mt-8">
               <img
-                className="w-[340px] h-[340px] object-cover"
+                className="w-72 mx-auto object-cover"
                 src={talentGuy1}
                 alt=""
               />
             </div>
           </div>
-          <div className="w-[340px] mt-8 mx-auto">
+          <div className="w-[340px] mt-7 mx-auto">
             <h2 className="text-3xl text-[#9fdfdf] text-center capitalize">
               Reliable jobs
             </h2>
