@@ -7,7 +7,7 @@ const Dashboard = () => {
   return (
     <>
       <div className="flex min-h-screen flex-no-wrap">
-        <div className="w-4/12 absolute sm:relative py-10 bg-[#173c40] shadow md:h-full flex-col pt-16 justify-between hidden sm:flex">
+        <div className="w-4/12  absolute sm:relative bg-[#173c40] shadow md:h-full flex-col pt-16 justify-between hidden sm:flex">
           <div className="px-8">
             <div className="w-48 mx-auto flex items-center">
               <img className="" src={logo} alt="" />
@@ -342,8 +342,8 @@ const Dashboard = () => {
             </ul>
           </div>
         </div>
-        <div className="container mx-auto py-10 h-64 md:w-4/5 w-11/12 px-6">
-          <div className="w-full h-full">
+        <div className="mx-auto md:w-4/5 w-11/12 px-4">
+          <div className="">
             <Signup />
           </div>
         </div>
