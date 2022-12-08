@@ -7,16 +7,16 @@ const Dashboard = () => {
   return (
     <>
       <div className="flex min-h-screen flex-no-wrap">
-        <div className="w-4/12  absolute sm:relative bg-[#173c40] shadow md:h-full flex-col pt-16 justify-between hidden sm:flex">
+        <div className="w-96 lg:w-4/12 absolute sm:relative bg-[#173c40] shadow md:h-full flex-col pt-20 justify-between hidden sm:flex">
           <div className="px-8">
-            <div className="w-48 mx-auto flex items-center">
+            <div className="w-44 lg:w-48 mx-auto flex items-center">
               <img className="" src={logo} alt="" />
             </div>
-            <div className="mt-6">
-              <div className="w-[280px] mx-auto">
+            <div className="mt-10">
+              <div className="w-56 lg:w-[280px] mx-auto">
                 <img src={talentGuy1} alt="" />
               </div>
-              <div className="mt-6">
+              <div className="py-10">
                 <h2 className="text-3xl text-[#8bd3d3] text-medium text-center">
                   Reliable jobs
                 </h2>
@@ -29,7 +29,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        <div
+        {/* <div
           className="w-64 z-40 absolute bg-gray-800 shadow md:h-full flex-col justify-between sm:hidden  transition duration-150 ease-in-out"
           id="mobile-nav"
         >
@@ -341,7 +341,7 @@ const Dashboard = () => {
               </li>
             </ul>
           </div>
-        </div>
+        </div> */}
         <div className="mx-auto md:w-4/5 w-11/12 px-4">
           <div className="">
             <Signup />

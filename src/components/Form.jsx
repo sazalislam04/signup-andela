@@ -1,10 +1,44 @@
+import { useState } from "react";
+
 const Form = () => {
+  const [checkTerms, setCheckTerms] = useState("");
+  const [checkPrivacy, setCheckPrivacy] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const fname = form.fname.value;
+    const lname = form.lname.value;
+    const email = form.email.value;
+    const country = form.country.value;
+    const data = {
+      fname,
+      lname,
+      email,
+      country,
+    };
+    console.log(data);
+    if (!fname) {
+      alert("Please enter a valid first name.");
+    } else if (!lname) {
+      alert("Please enter a valid last name.");
+    } else if (!email) {
+      alert("Please enter a valid email address.");
+    } else if (country === "Select") {
+      alert("Please select a valid country from the list.");
+    } else if (!checkTerms || !checkPrivacy) {
+      return alert("Please check the policy and terms checkboxes.");
+    } else {
+    }
+  };
+
   return (
     <>
-      <section className="bg-white mt-12">
-        <div className="container w-11/12 mx-auto">
-          <div className="mb-14 px-8 text-2xl text-center">
-            <h2>
+      <section className="bg-white mt-16">
+        <div className="w-full lg:w-11/12 mx-auto">
+          <div className="mb-14 lg:px-24 text-2xl text-center">
+            <h2 className="text-xl font-normal">
               Becoming a{" "}
               <span className="text-[#58c972] italic">
                 part of our global community{" "}
@@ -12,7 +46,7 @@ const Form = () => {
               has never been easier
             </h2>
           </div>
-          <form className="w-full mx-auto">
+          <form onSubmit={handleSubmit} className="w-full mx-auto">
             <div>
               <label className="px-3 text-gray-400" htmlFor="fname">
                 First Name
@@ -37,6 +71,7 @@ const Form = () => {
 
                 <input
                   type="text"
+                  name="fname"
                   className="block w-full py-4 text-gray-700 bg-white border rounded-lg px-11 outline-none"
                   placeholder=""
                 />
@@ -66,6 +101,7 @@ const Form = () => {
 
                 <input
                   type="text"
+                  name="lname"
                   className="block w-full py-4 text-gray-700 bg-white border rounded-lg px-11 outline-none"
                   placeholder=""
                 />
@@ -95,6 +131,7 @@ const Form = () => {
 
                 <input
                   type="email"
+                  name="email"
                   className="block w-full py-4 text-gray-700 bg-white border rounded-lg px-11 outline-none"
                   placeholder=""
                 />
@@ -131,7 +168,7 @@ const Form = () => {
                   name="country"
                   className="block w-full py-4 text-gray-700 bg-white border rounded-lg px-11 outline-none"
                 >
-                  <option value="Select country ...">Select country ...</option>
+                  <option value="Select">Select country ...</option>
                   <option value="Afghanistan">Afghanistan</option>
                   <option value="Åland Islands">Åland Islands</option>
                   <option value="Albania">Albania</option>
@@ -463,7 +500,11 @@ const Form = () => {
               </div>
             </div>
             <div className="px-3 mt-4 flex items-center gap-1">
-              <input type="checkbox" />
+              <input
+                onChange={(e) => setCheckTerms(e.target.value)}
+                type="checkbox"
+                name="checkbox1"
+              />
               <small className="text-gray-400">
                 I agree to Andela's{" "}
                 <strong className="text-xs text-gray-900">
@@ -472,7 +513,12 @@ const Form = () => {
               </small>
             </div>
             <div className="px-3 mt-2">
-              <input className="mr-1" type="checkbox" />
+              <input
+                onChange={(e) => setCheckPrivacy(e.target.value)}
+                className="mr-1"
+                type="checkbox"
+                name="checkbox2"
+              />
               <small className="text-gray-400">
                 I understand that Andela will process my information in
                 accordance with their{" "}
