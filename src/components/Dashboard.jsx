@@ -1,30 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
 import talentGuy1 from "../assets/img/talent-guy-1.png";
+import talentGuy2 from "../assets/img/talent-guy-2.png";
+import lady from "../assets/img/talent-lady-3.png";
 import logo from "../assets/logo/andela-logo-white.png";
-import Signup from "./Signup";
+import Form from "./Form";
 
 const Dashboard = () => {
+  const [page, setPage] = useState(1);
   return (
     <>
       <div className="flex min-h-screen flex-no-wrap">
-        <div className="w-96 lg:w-4/12 absolute sm:relative bg-[#173c40] shadow md:h-full flex-col pt-20 justify-between hidden sm:flex">
-          <div className="px-8">
+        <div className=" absolute sm:relative bg-[#173c40] shadow md:h-full flex-col pt-16 min-h-screen w-96 lg:w-4/12 justify-between hidden sm:flex">
+          <div className="px-8 ">
             <div className="w-44 lg:w-48 mx-auto flex items-center">
               <img className="" src={logo} alt="" />
             </div>
             <div className="mt-10">
               <div className="w-56 lg:w-[280px] mx-auto">
-                <img src={talentGuy1} alt="" />
+                {page === 1 && <img src={talentGuy1} alt="" />}
+                {page === 2 && <img src={talentGuy2} alt="" />}
+                {page === 3 && <img src={lady} alt="" />}
               </div>
               <div className="py-10">
-                <h2 className="text-3xl text-[#8bd3d3] text-medium text-center">
-                  Reliable jobs
-                </h2>
-                <p className="mt-2 text-base text-gray-200 text-center">
-                  We only work with trusted, vetted companies. Our team works
-                  globally to eliminate fraud or illegal activity, ensuring the
-                  jobs you apply for are safe and secure.
-                </p>
+                {page === 1 && (
+                  <>
+                    <h2 className="text-3xl text-[#8bd3d3] text-medium text-center">
+                      Reliable jobs
+                    </h2>
+                    <p className="mt-2 text-base text-gray-200 text-center">
+                      We only work with trusted, vetted companies. Our team
+                      works globally to eliminate fraud or illegal activity,
+                      ensuring the jobs you apply for are safe and secure.
+                    </p>
+                  </>
+                )}
+                {page === 2 && (
+                  <>
+                    <h2 className="text-3xl text-[#8bd3d3] text-medium text-center">
+                      Work from anywhere
+                    </h2>
+                    <p className="mt-2 text-base text-gray-200 text-center">
+                      Fully remote, forever. With remote roles across multiple
+                      time zones, you choose where and when you work, creating a
+                      healthy, flexible work-life balance.
+                    </p>
+                  </>
+                )}
+                {page === 3 && (
+                  <>
+                    <h2 className="text-3xl text-[#8bd3d3] text-medium text-center">
+                      Fully supported
+                    </h2>
+                    <p className="mt-2 text-base text-gray-200 text-center">
+                      Wherever you are and whatever issues you may face, we’re
+                      here to help solve any challenges, fast!
+                    </p>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -342,10 +374,8 @@ const Dashboard = () => {
             </ul>
           </div>
         </div> */}
-        <div className="mx-auto md:w-4/5 w-11/12 px-4">
-          <div className="">
-            <Signup />
-          </div>
+        <div className="mx-auto w-full md:w-4/5 lg:w-11/12 px-4">
+          <Form setPage={setPage} page={page} />
         </div>
       </div>
     </>
