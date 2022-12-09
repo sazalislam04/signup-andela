@@ -9,19 +9,19 @@ const Dashboard = () => {
   const [page, setPage] = useState(1);
   return (
     <>
-      <div className="flex min-h-screen flex-no-wrap">
-        <div className=" absolute sm:relative bg-[#173c40] shadow md:h-full flex-col pt-16 min-h-screen w-96 lg:w-4/12 justify-between hidden sm:flex">
-          <div className="px-8 ">
+      <div className="flex flex-no-wrap">
+        <div className="sticky top-0 sm:min-h-screen sm:relative bg-[#173c40] shadow md:h-full flex-col pt-16 w-96 lg:w-[40%] justify-between hidden sm:flex">
+          <div className="px-2">
             <div className="w-44 lg:w-48 mx-auto flex items-center">
               <img className="" src={logo} alt="" />
             </div>
-            <div className="mt-10">
+            <div className="mt-14 lg:mt-10">
               <div className="w-56 lg:w-[280px] mx-auto">
                 {page === 1 && <img src={talentGuy1} alt="" />}
                 {page === 2 && <img src={talentGuy2} alt="" />}
                 {page === 3 && <img src={lady} alt="" />}
               </div>
-              <div className="py-5">
+              <div className="pt-16 lg:py-[6%]">
                 {page === 1 && (
                   <>
                     <h2 className="text-3xl text-[#8bd3d3] text-medium text-center">

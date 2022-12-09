@@ -1,16 +1,14 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const SubmitForm = ({ setPage, formData }) => {
   const { register, handleSubmit } = useForm();
+  const [pdf, setPdf] = useState("");
 
   const handleSubmitFormData = (data) => {
     const { country, email, fname, lname, skills, experience } = formData;
-
-    console.log(data);
-    const pdfData = data.pdffile[0].name;
-
+    const pdfData = data.pdffile[0];
     const { english, referralBy, totalExperience } = data;
-
     const storedData = {
       country,
       email,
@@ -30,7 +28,7 @@ const SubmitForm = ({ setPage, formData }) => {
       alert("Please select your total work experience.");
     } else if (data.totalExperience === "Select") {
       alert("Please attach your resume before submitting.");
-    } else if (!pdfData) {
+    } else if (!data.pdffile) {
       alert("Please attach your resume before submitting.");
     } else {
       alert("Congratulations! Form Submited Successed");
@@ -47,6 +45,7 @@ const SubmitForm = ({ setPage, formData }) => {
     //   .then((res) => res.json())
     //   .then((data) => console.log(data))
     //   .catch((error) => console.log(error));
+    console.log(storedData);
   };
 
   return (
@@ -202,13 +201,14 @@ const SubmitForm = ({ setPage, formData }) => {
                 </svg>
                 <h2 className="mx-3 text-gray-400 text-center">
                   {" "}
-                  Click to add file
+                  {pdf ? pdf : "Click to add file"}
                 </h2>
 
                 <input
                   id="dropzone-file"
                   {...register("pdffile")}
                   type="file"
+                  onChange={(e) => setPdf(e.target.value)}
                   accept="application/pdf,application/vnd.ms-excel"
                   className=" hidden w-full py-4 text-gray-700 bg-white border rounded-lg px-9 outline-none"
                 />
