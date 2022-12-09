@@ -186,8 +186,8 @@ const SubmitForm = ({ setPage }) => {
               >
                 Back
               </button>
-              <button className="px-8 py-[10px] text-gray-100 rounded-full bg-[#58c671]">
-                Next
+              <button className="px-6 py-[10px] text-gray-100 rounded-full bg-[#58c671]">
+                Submit
               </button>
             </div>
           </form>

@@ -1,14 +1,20 @@
-const PersonalInfo = ({ setPage }) => {
+const PersonalInfo = ({ setPage, setFormData }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
     const skills = form.skills.value;
+    const name = form.name.value;
+    console.log(name);
 
     if (skills === "Select") {
       alert("Please select at least one skill.");
+    } else if (name) {
+      alert("Please select your years of experience.");
     } else {
       setPage((prevPage) => prevPage + 1);
     }
+
+    setFormData({ skills });
   };
 
   return (
@@ -108,11 +114,14 @@ const PersonalInfo = ({ setPage }) => {
               <fieldset>
                 <div className="">
                   <div className="flex justify-evenly flex-wrap">
-                    <label htmlFor="color_tt" className="cursor-pointer p-0.5">
+                    <label
+                      htmlFor="experience_tt"
+                      className="cursor-pointer p-0.5"
+                    >
                       <input
                         type="radio"
-                        name="color"
-                        id="color_tt"
+                        name="experience"
+                        id="experience_tt"
                         className="peer sr-only"
                       />
 
@@ -120,23 +129,32 @@ const PersonalInfo = ({ setPage }) => {
                         {"<"}1 year
                       </span>
                     </label>
-                    <label htmlFor="color_tf" className="cursor-pointer p-0.5">
+                    <label
+                      htmlFor="experience_tf"
+                      className="cursor-pointer p-0.5"
+                    >
                       <input
                         type="radio"
-                        name="color"
-                        id="color_tf"
+                        name="experience"
+                        id="experience_tf"
                         className="peer sr-only"
                       />
 
-                      <span className="group inline-block rounded border px-5 py-[9px] text-sm peer-checked:border-black peer-checked:text-black">
+                      <span
+                        name="experience"
+                        className="group inline-block rounded border px-5 py-[9px] text-sm peer-checked:border-black peer-checked:text-black"
+                      >
                         1-2 Years
                       </span>
                     </label>
-                    <label htmlFor="color_tr" className="cursor-pointer p-0.5">
+                    <label
+                      htmlFor="experience_tr"
+                      className="cursor-pointer p-0.5"
+                    >
                       <input
                         type="radio"
-                        name="color"
-                        id="color_tr"
+                        name="experience"
+                        id="experience_tr"
                         className="peer sr-only"
                       />
 
@@ -145,11 +163,14 @@ const PersonalInfo = ({ setPage }) => {
                       </span>
                     </label>
 
-                    <label htmlFor="color_fr" className="cursor-pointer p-0.5">
+                    <label
+                      htmlFor="experience_fr"
+                      className="cursor-pointer p-0.5"
+                    >
                       <input
                         type="radio"
-                        name="color"
-                        id="color_fr"
+                        name="experience"
+                        id="experience_fr"
                         className="peer sr-only"
                       />
 
@@ -158,11 +179,14 @@ const PersonalInfo = ({ setPage }) => {
                       </span>
                     </label>
 
-                    <label htmlFor="color_cb" className="cursor-pointer p-0.5">
+                    <label
+                      htmlFor="experience_cb"
+                      className="cursor-pointer p-0.5"
+                    >
                       <input
                         type="radio"
-                        name="color"
-                        id="color_cb"
+                        name="experience"
+                        id="experience_cb"
                         className="peer sr-only"
                       />
 

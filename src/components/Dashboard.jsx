@@ -21,7 +21,7 @@ const Dashboard = () => {
                 {page === 2 && <img src={talentGuy2} alt="" />}
                 {page === 3 && <img src={lady} alt="" />}
               </div>
-              <div className="py-10">
+              <div className="py-5">
                 {page === 1 && (
                   <>
                     <h2 className="text-3xl text-[#8bd3d3] text-medium text-center">
@@ -52,12 +52,34 @@ const Dashboard = () => {
                       Fully supported
                     </h2>
                     <p className="mt-2 text-base text-gray-200 text-center">
-                      Wherever you are and whatever issues you may face, we’re
+                      Wherever you are and whatever issues you may face, we're
                       here to help solve any challenges, fast!
                     </p>
                   </>
                 )}
               </div>
+            </div>
+            <div className="flex gap-4 justify-center items-center py-5">
+              <span
+                className={`w-2 h-2 rounded-full ${
+                  page === 1 ? "bg-yellow-500" : "bg-gray-300"
+                }`}
+              ></span>
+              <span
+                className={`w-2 h-2 rounded-full ${
+                  page === 2 ? "bg-yellow-500" : "bg-gray-300"
+                }`}
+              ></span>
+              <span
+                className={`w-2 h-2 rounded-full ${
+                  page === 3 ? "bg-yellow-500" : "bg-gray-300"
+                }`}
+              ></span>
+              <span
+                className={`w-2 h-2 rounded-full ${
+                  page === 4 ? "bg-yellow-500" : "bg-gray-300"
+                }`}
+              ></span>
             </div>
           </div>
         </div>
