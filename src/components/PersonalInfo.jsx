@@ -1,20 +1,27 @@
-const PersonalInfo = ({ setPage, setFormData }) => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const skills = form.skills.value;
-    const name = form.name.value;
-    console.log(name);
+import { useForm } from "react-hook-form";
 
-    if (skills === "Select") {
+const PersonalInfo = ({ setPage, setFormData, formData }) => {
+  const { register, handleSubmit } = useForm();
+  const { country, email, fname, lname } = formData;
+
+  const formSubmit = (data) => {
+    const { Skills, name } = data;
+    const newFormData = {
+      country,
+      email,
+      fname,
+      lname,
+      Skills,
+      name,
+    };
+    setFormData(newFormData);
+    if (data.Skills === "Select") {
       alert("Please select at least one skill.");
-    } else if (name) {
-      alert("Please select your years of experience.");
+    } else if (!data.name) {
+      alert("Please select at least one Experience.");
     } else {
       setPage((prevPage) => prevPage + 1);
     }
-
-    setFormData({ skills });
   };
 
   return (
@@ -27,10 +34,10 @@ const PersonalInfo = ({ setPage, setFormData }) => {
               skill
             </h2>
           </div>
-          <form onSubmit={handleSubmit} className="w-full">
+          <form onSubmit={handleSubmit(formSubmit)} className="w-full">
             <div className="mt-4">
               <select
-                name="skills"
+                {...register("Skills")}
                 className="block w-full py-4 text-gray-700 bg-white border rounded-lg px-5 outline-none"
               >
                 <option value="Select">Select ...</option>
@@ -120,9 +127,10 @@ const PersonalInfo = ({ setPage, setFormData }) => {
                     >
                       <input
                         type="radio"
-                        name="experience"
+                        {...register("name")}
                         id="experience_tt"
                         className="peer sr-only"
+                        value="<1 year"
                       />
 
                       <span className="group inline-block rounded border px-5 py-[9px] text-sm peer-checked:border-black peer-checked:text-black">
@@ -135,15 +143,13 @@ const PersonalInfo = ({ setPage, setFormData }) => {
                     >
                       <input
                         type="radio"
-                        name="experience"
+                        {...register("name")}
                         id="experience_tf"
                         className="peer sr-only"
+                        value="1-2 Years"
                       />
 
-                      <span
-                        name="experience"
-                        className="group inline-block rounded border px-5 py-[9px] text-sm peer-checked:border-black peer-checked:text-black"
-                      >
+                      <span className="group inline-block rounded border px-5 py-[9px] text-sm peer-checked:border-black peer-checked:text-black">
                         1-2 Years
                       </span>
                     </label>
@@ -153,9 +159,10 @@ const PersonalInfo = ({ setPage, setFormData }) => {
                     >
                       <input
                         type="radio"
-                        name="experience"
+                        {...register("name")}
                         id="experience_tr"
                         className="peer sr-only"
+                        value="3-5 Years"
                       />
 
                       <span className="group inline-block rounded border px-5 py-[9px] text-sm peer-checked:border-black peer-checked:text-black">
@@ -169,9 +176,10 @@ const PersonalInfo = ({ setPage, setFormData }) => {
                     >
                       <input
                         type="radio"
-                        name="experience"
+                        {...register("name")}
                         id="experience_fr"
                         className="peer sr-only"
+                        value="6-10 Years"
                       />
 
                       <span className="group inline-block rounded border px-5 py-[9px] text-sm peer-checked:border-black peer-checked:text-black">
@@ -185,9 +193,10 @@ const PersonalInfo = ({ setPage, setFormData }) => {
                     >
                       <input
                         type="radio"
-                        name="experience"
+                        {...register("name")}
                         id="experience_cb"
                         className="peer sr-only"
+                        value=">10 Years"
                       />
 
                       <span className="group inline-block rounded border px-5 py-[9px] text-sm peer-checked:border-black peer-checked:text-black">

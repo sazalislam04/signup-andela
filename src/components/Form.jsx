@@ -33,9 +33,19 @@ const Form = ({ page, setPage }) => {
 
       {page === 1 && <SignUpInfo setFormData={setFormData} setPage={setPage} />}
       {page === 2 && (
-        <PersonalInfo setPage={setPage} setFormData={setFormData} />
+        <PersonalInfo
+          setPage={setPage}
+          setFormData={setFormData}
+          formData={formData}
+        />
       )}
-      {page === 3 && <SubmitForm setPage={setPage} />}
+      {page === 3 && (
+        <SubmitForm
+          setPage={setPage}
+          formData={formData}
+          setFormData={setFormData}
+        />
+      )}
       {page === 4 && ""}
     </div>
   );

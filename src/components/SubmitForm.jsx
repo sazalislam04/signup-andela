@@ -1,21 +1,31 @@
-const SubmitForm = ({ setPage }) => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const fname = form.fname.value;
-    const lname = form.lname.value;
-    const email = form.email.value;
-    const country = form.country.value;
-    if (!fname) {
-      alert("Please enter a valid first name.");
-    } else if (!lname) {
-      alert("Please enter a valid last name.");
-    } else if (!email) {
-      alert("Please enter a valid email address.");
-    } else if (country === "Select") {
-      alert("Please select a valid country from the list.");
-    } else {
-    }
+import { useForm } from "react-hook-form";
+
+const SubmitForm = ({ setPage, formData, setFormData }) => {
+  const { register, handleSubmit } = useForm();
+
+  const handleSubmitFormData = (data) => {
+    const { country, email, fname, lname, Skills, name } = formData;
+
+    console.log(data);
+    const pdfData = data.pdffile[0].name;
+    const formPdf = new FormData();
+    formPdf.append("pdffile", pdfData);
+
+    const { english, referralBy, totalExperience } = data;
+
+    const storedData = {
+      country,
+      email,
+      fname,
+      lname,
+      Skills,
+      name,
+      english,
+      referralBy,
+      totalExperience,
+      formPdf,
+    };
+    console.log(storedData);
   };
 
   return (
@@ -25,7 +35,10 @@ const SubmitForm = ({ setPage }) => {
           <div className="mb-14 lg:px-24 text-2xl text-center">
             <h2 className="text-xl font-normal">More about you</h2>
           </div>
-          <form onSubmit={handleSubmit} className="w-full mx-auto">
+          <form
+            onSubmit={handleSubmit(handleSubmitFormData)}
+            className="w-full mx-auto"
+          >
             <div>
               <label className="px-3 text-gray-400" htmlFor="fname">
                 English proficiency
@@ -35,7 +48,7 @@ const SubmitForm = ({ setPage }) => {
                   <small className="mx-3 text-xl text-gray-300">{"<>"}</small>
                 </span>
                 <select
-                  name="english"
+                  {...register("english")}
                   className="block w-full py-4 text-gray-700 bg-white border rounded-lg px-9 outline-none"
                 >
                   <option value="Select...">Select...</option>
@@ -58,7 +71,7 @@ const SubmitForm = ({ setPage }) => {
                     height="17"
                     viewBox="0 0 20 17"
                     fill="none"
-                    class="mx-3"
+                    className="mx-3"
                     data-src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMTciIHZpZXdCb3g9IjAgMCAyMCAxNyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTguNjcgOS4wMkM4LjQ1IDkuMDEgOC4yMyA5IDggOUM1LjU4IDkgMy4zMiA5LjY3IDEuMzkgMTAuODJDMC41MSAxMS4zNCAwIDEyLjMyIDAgMTMuMzVWMTVDMCAxNS41NSAwLjQ1IDE2IDEgMTZIOS4yNkM4LjQ3IDE0Ljg3IDggMTMuNDkgOCAxMkM4IDEwLjkzIDguMjUgOS45MyA4LjY3IDkuMDJaIiBmaWxsPSIjRENFMkY5Ii8+CjxwYXRoIGQ9Ik04IDhDMTAuMjA5MSA4IDEyIDYuMjA5MTQgMTIgNEMxMiAxLjc5MDg2IDEwLjIwOTEgMCA4IDBDNS43OTA4NiAwIDQgMS43OTA4NiA0IDRDNCA2LjIwOTE0IDUuNzkwODYgOCA4IDhaIiBmaWxsPSIjRENFMkY5Ii8+CjxwYXRoIGQ9Ik0xOC43NDk5IDExLjk5OThDMTguNzQ5OSAxMS43Nzk4IDE4LjcxOTkgMTEuNTc5OCAxOC42ODk5IDExLjM2OThMMTkuNTI5OSAxMC42Mzk4QzE5LjcwOTkgMTAuNDc5OCAxOS43NDk5IDEwLjIxOTggMTkuNjI5OSAxMC4wMDk4TDE5LjAzOTkgOC45ODk3N0MxOC45MTk5IDguNzc5NzcgMTguNjY5OSA4LjY4OTc3IDE4LjQ0OTkgOC43Njk3N0wxNy4zODk5IDkuMTI5NzdDMTcuMDY5OSA4Ljg1OTc3IDE2LjcwOTkgOC42NDk3NyAxNi4zMDk5IDguNDk5NzdMMTYuMDg5OSA3LjQwOTc3QzE2LjAzOTkgNy4xNzk3NyAxNS44Mzk5IDcuMDA5NzcgMTUuNTk5OSA3LjAwOTc3SDE0LjQxOTlDMTQuMTc5OSA3LjAwOTc3IDEzLjk3OTkgNy4xNzk3NyAxMy45Mjk5IDcuNDA5NzdMMTMuNzA5OSA4LjQ5OTc3QzEzLjMwOTkgOC42NDk3NyAxMi45NDk5IDguODU5NzcgMTIuNjI5OSA5LjEyOTc3TDExLjU2OTkgOC43Njk3N0MxMS4zMzk5IDguNjg5NzcgMTEuMDk5OSA4Ljc4OTc3IDEwLjk3OTkgOC45ODk3N0wxMC4zODk5IDEwLjAwOThDMTAuMjY5OSAxMC4yMTk4IDEwLjMwOTkgMTAuNDc5OCAxMC40ODk5IDEwLjYzOThMMTEuMzI5OSAxMS4zNjk4QzExLjI5OTkgMTEuNTc5OCAxMS4yNjk5IDExLjc3OTggMTEuMjY5OSAxMS45OTk4QzExLjI2OTkgMTIuMjE5OCAxMS4yOTk5IDEyLjQxOTggMTEuMzI5OSAxMi42Mjk4TDEwLjQ4OTkgMTMuMzU5OEMxMC4zMDk5IDEzLjUxOTggMTAuMjY5OSAxMy43Nzk4IDEwLjM4OTkgMTMuOTg5OEwxMC45Nzk5IDE1LjAwOThDMTEuMDk5OSAxNS4yMTk4IDExLjM0OTkgMTUuMzA5OCAxMS41Njk5IDE1LjIyOThMMTIuNjI5OSAxNC44Njk4QzEyLjk0OTkgMTUuMTM5OCAxMy4zMDk5IDE1LjM0OTggMTMuNzA5OSAxNS40OTk4TDEzLjkyOTkgMTYuNTg5OEMxMy45Nzk5IDE2LjgxOTggMTQuMTc5OSAxNi45ODk4IDE0LjQxOTkgMTYuOTg5OEgxNS41OTk5QzE1LjgzOTkgMTYuOTg5OCAxNi4wMzk5IDE2LjgxOTggMTYuMDg5OSAxNi41ODk4TDE2LjMwOTkgMTUuNDk5OEMxNi43MDk5IDE1LjM0OTggMTcuMDY5OSAxNS4xMzk4IDE3LjM4OTkgMTQuODY5OEwxOC40NDk5IDE1LjIyOThDMTguNjc5OSAxNS4zMDk4IDE4LjkxOTkgMTUuMjA5OCAxOS4wMzk5IDE1LjAwOThMMTkuNjI5OSAxMy45ODk4QzE5Ljc0OTkgMTMuNzc5OCAxOS43MDk5IDEzLjUxOTggMTkuNTI5OSAxMy4zNTk4TDE4LjY4OTkgMTIuNjI5OEMxOC43MTk5IDEyLjQxOTggMTguNzQ5OSAxMi4yMTk4IDE4Ljc0OTkgMTEuOTk5OFpNMTQuOTk5OSAxMy45OTk4QzEzLjg5OTkgMTMuOTk5OCAxMi45OTk5IDEzLjA5OTggMTIuOTk5OSAxMS45OTk4QzEyLjk5OTkgMTAuODk5OCAxMy44OTk5IDkuOTk5NzcgMTQuOTk5OSA5Ljk5OTc3QzE2LjA5OTkgOS45OTk3NyAxNi45OTk5IDEwLjg5OTggMTYuOTk5OSAxMS45OTk4QzE2Ljk5OTkgMTMuMDk5OCAxNi4wOTk5IDEzLjk5OTggMTQuOTk5OSAxMy45OTk4WiIgZmlsbD0iI0RDRTJGOSIvPgo8L3N2Zz4K"
                     xlink="http://www.w3.org/1999/xlink"
                   >
@@ -78,7 +91,7 @@ const SubmitForm = ({ setPage }) => {
                 </span>
 
                 <select
-                  name="totalExperience"
+                  {...register("totalExperience")}
                   className="block w-full py-4 text-gray-700 bg-white border rounded-lg px-9 outline-none"
                 >
                   <option value="Select...">Select...</option>
@@ -99,7 +112,7 @@ const SubmitForm = ({ setPage }) => {
             </div>
             <div className="mt-4">
               <label className="px-3 text-gray-400" htmlFor="email">
-                Email
+                How did you hear about us? (optional)
               </label>
               <div className="relative flex items-center mt-4">
                 <span className="absolute">
@@ -109,7 +122,7 @@ const SubmitForm = ({ setPage }) => {
                     height="16"
                     viewBox="0 0 31 16"
                     fill="none"
-                    class="mx-3"
+                    className="mx-3"
                     data-src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzEiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAzMSAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE1LjUgOC43MTg3NUMxNy42MDU0IDguNzE4NzUgMTkuNDY1NCA5LjIyMjUgMjAuOTc2NyA5Ljg4MTI1QzIyLjM3MTcgMTAuNTAxMiAyMy4yNSAxMS44OTYyIDIzLjI1IDEzLjQwNzVWMTQuMjA4M0MyMy4yNSAxNC45MTg3IDIyLjY2ODcgMTUuNSAyMS45NTgzIDE1LjVIOS4wNDE2N0M4LjMzMTI1IDE1LjUgNy43NSAxNC45MTg3IDcuNzUgMTQuMjA4M1YxMy40MjA0QzcuNzUgMTEuODk2MiA4LjYyODMzIDEwLjUwMTIgMTAuMDIzMyA5Ljg5NDE3QzExLjUzNDYgOS4yMjI1IDEzLjM5NDYgOC43MTg3NSAxNS41IDguNzE4NzVaTTUuMTY2NjcgOS4wNDE2N0M2LjU4NzUgOS4wNDE2NyA3Ljc1IDcuODc5MTcgNy43NSA2LjQ1ODMzQzcuNzUgNS4wMzc1IDYuNTg3NSAzLjg3NSA1LjE2NjY3IDMuODc1QzMuNzQ1ODMgMy44NzUgMi41ODMzMyA1LjAzNzUgMi41ODMzMyA2LjQ1ODMzQzIuNTgzMzMgNy44NzkxNyAzLjc0NTgzIDkuMDQxNjcgNS4xNjY2NyA5LjA0MTY3Wk02LjYyNjI1IDEwLjQ2MjVDNi4xNDgzMyAxMC4zODUgNS42NzA0MiAxMC4zMzMzIDUuMTY2NjcgMTAuMzMzM0MzLjg4NzkyIDEwLjMzMzMgMi42NzM3NSAxMC42MDQ2IDEuNTc1ODMgMTEuMDgyNUMwLjYyIDExLjQ5NTggMCAxMi40MjU4IDAgMTMuNDcyMVYxNC4yMDgzQzAgMTQuOTE4NyAwLjU4MTI1IDE1LjUgMS4yOTE2NyAxNS41SDUuODEyNVYxMy40MjA0QzUuODEyNSAxMi4zNDgzIDYuMTA5NTggMTEuMzQwOCA2LjYyNjI1IDEwLjQ2MjVaTTI1LjgzMzMgOS4wNDE2N0MyNy4yNTQyIDkuMDQxNjcgMjguNDE2NyA3Ljg3OTE3IDI4LjQxNjcgNi40NTgzM0MyOC40MTY3IDUuMDM3NSAyNy4yNTQyIDMuODc1IDI1LjgzMzMgMy44NzVDMjQuNDEyNSAzLjg3NSAyMy4yNSA1LjAzNzUgMjMuMjUgNi40NTgzM0MyMy4yNSA3Ljg3OTE3IDI0LjQxMjUgOS4wNDE2NyAyNS44MzMzIDkuMDQxNjdaTTMxIDEzLjQ3MjFDMzEgMTIuNDI1OCAzMC4zOCAxMS40OTU4IDI5LjQyNDIgMTEuMDgyNUMyOC4zMjYzIDEwLjYwNDYgMjcuMTEyMSAxMC4zMzMzIDI1LjgzMzMgMTAuMzMzM0MyNS4zMjk2IDEwLjMzMzMgMjQuODUxNyAxMC4zODUgMjQuMzczOCAxMC40NjI1QzI0Ljg5MDQgMTEuMzQwOCAyNS4xODc1IDEyLjM0ODMgMjUuMTg3NSAxMy40MjA0VjE1LjVIMjkuNzA4M0MzMC40MTg3IDE1LjUgMzEgMTQuOTE4NyAzMSAxNC4yMDgzVjEzLjQ3MjFaTTE1LjUgMEMxNy42NDQyIDAgMTkuMzc1IDEuNzMwODMgMTkuMzc1IDMuODc1QzE5LjM3NSA2LjAxOTE3IDE3LjY0NDIgNy43NSAxNS41IDcuNzVDMTMuMzU1OCA3Ljc1IDExLjYyNSA2LjAxOTE3IDExLjYyNSAzLjg3NUMxMS42MjUgMS43MzA4MyAxMy4zNTU4IDAgMTUuNSAwWiIgZmlsbD0iI0RDRTJGOSIvPgo8L3N2Zz4K"
                     xlink="http://www.w3.org/1999/xlink"
                   >
@@ -121,7 +134,7 @@ const SubmitForm = ({ setPage }) => {
                 </span>
 
                 <select
-                  name="referralBy"
+                  {...register("referralBy")}
                   className="block w-full py-4 text-gray-700 bg-white border rounded-lg px-11 outline-none"
                 >
                   <option value="Select...">Select...</option>
@@ -173,6 +186,7 @@ const SubmitForm = ({ setPage }) => {
 
                 <input
                   id="dropzone-file"
+                  {...register("pdffile")}
                   type="file"
                   accept="application/pdf,application/vnd.ms-excel"
                   className=" hidden w-full py-4 text-gray-700 bg-white border rounded-lg px-9 outline-none"
