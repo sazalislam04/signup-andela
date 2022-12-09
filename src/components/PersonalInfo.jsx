@@ -5,19 +5,20 @@ const PersonalInfo = ({ setPage, setFormData, formData }) => {
   const { country, email, fname, lname } = formData;
 
   const formSubmit = (data) => {
-    const { Skills, name } = data;
+    const { skills, experience } = data;
     const newFormData = {
       country,
       email,
       fname,
       lname,
-      Skills,
-      name,
+      skills,
+      experience,
     };
     setFormData(newFormData);
-    if (data.Skills === "Select") {
+
+    if (data.skills === "Select") {
       alert("Please select at least one skill.");
-    } else if (!data.name) {
+    } else if (!data.experience) {
       alert("Please select at least one Experience.");
     } else {
       setPage((prevPage) => prevPage + 1);
@@ -37,7 +38,7 @@ const PersonalInfo = ({ setPage, setFormData, formData }) => {
           <form onSubmit={handleSubmit(formSubmit)} className="w-full">
             <div className="mt-4">
               <select
-                {...register("Skills")}
+                {...register("skills")}
                 className="block w-full py-4 text-gray-700 bg-white border rounded-lg px-5 outline-none"
               >
                 <option value="Select">Select ...</option>
@@ -127,7 +128,7 @@ const PersonalInfo = ({ setPage, setFormData, formData }) => {
                     >
                       <input
                         type="radio"
-                        {...register("name")}
+                        {...register("experience")}
                         id="experience_tt"
                         className="peer sr-only"
                         value="<1 year"
@@ -143,7 +144,7 @@ const PersonalInfo = ({ setPage, setFormData, formData }) => {
                     >
                       <input
                         type="radio"
-                        {...register("name")}
+                        {...register("experience")}
                         id="experience_tf"
                         className="peer sr-only"
                         value="1-2 Years"
@@ -159,7 +160,7 @@ const PersonalInfo = ({ setPage, setFormData, formData }) => {
                     >
                       <input
                         type="radio"
-                        {...register("name")}
+                        {...register("experience")}
                         id="experience_tr"
                         className="peer sr-only"
                         value="3-5 Years"
@@ -176,7 +177,7 @@ const PersonalInfo = ({ setPage, setFormData, formData }) => {
                     >
                       <input
                         type="radio"
-                        {...register("name")}
+                        {...register("experience")}
                         id="experience_fr"
                         className="peer sr-only"
                         value="6-10 Years"
@@ -193,7 +194,7 @@ const PersonalInfo = ({ setPage, setFormData, formData }) => {
                     >
                       <input
                         type="radio"
-                        {...register("name")}
+                        {...register("experience")}
                         id="experience_cb"
                         className="peer sr-only"
                         value=">10 Years"

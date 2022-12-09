@@ -1,15 +1,13 @@
 import { useForm } from "react-hook-form";
 
-const SubmitForm = ({ setPage, formData, setFormData }) => {
+const SubmitForm = ({ setPage, formData }) => {
   const { register, handleSubmit } = useForm();
 
   const handleSubmitFormData = (data) => {
-    const { country, email, fname, lname, Skills, name } = formData;
+    const { country, email, fname, lname, skills, experience } = formData;
 
     console.log(data);
     const pdfData = data.pdffile[0].name;
-    const formPdf = new FormData();
-    formPdf.append("pdffile", pdfData);
 
     const { english, referralBy, totalExperience } = data;
 
@@ -18,14 +16,37 @@ const SubmitForm = ({ setPage, formData, setFormData }) => {
       email,
       fname,
       lname,
-      Skills,
-      name,
+      skills,
+      experience,
       english,
       referralBy,
       totalExperience,
-      formPdf,
+      pdfData,
     };
-    console.log(storedData);
+
+    if (data.english === "Select") {
+      alert("Please select your English proficiency level.");
+    } else if (data.referralBy === "Select") {
+      alert("Please select your total work experience.");
+    } else if (data.totalExperience === "Select") {
+      alert("Please attach your resume before submitting.");
+    } else if (!pdfData) {
+      alert("Please attach your resume before submitting.");
+    } else {
+      alert("Congratulations! Form Submited Successed");
+    }
+
+    // stored data in database
+    // fetch("http://localhost:5000/form-data", {
+    //   method: "PUT",
+    //   headers: {
+    //     "content-type": "application/json",
+    //   },
+    //   body: JSON.stringify(storedData),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => console.log(data))
+    //   .catch((error) => console.log(error));
   };
 
   return (
@@ -51,7 +72,7 @@ const SubmitForm = ({ setPage, formData, setFormData }) => {
                   {...register("english")}
                   className="block w-full py-4 text-gray-700 bg-white border rounded-lg px-9 outline-none"
                 >
-                  <option value="Select...">Select...</option>
+                  <option value="Select">Select...</option>
                   <option value="Native">Native</option>
                   <option value="Advanced C1/C2">Advanced C1/C2</option>
                   <option value="Intermediate B1/B2">Intermediate B1/B2</option>
@@ -94,7 +115,7 @@ const SubmitForm = ({ setPage, formData, setFormData }) => {
                   {...register("totalExperience")}
                   className="block w-full py-4 text-gray-700 bg-white border rounded-lg px-9 outline-none"
                 >
-                  <option value="Select...">Select...</option>
+                  <option value="Select">Select...</option>
                   <option value="Associate (0-3 yrs professional experience)">
                     0-3 yrs professional experience
                   </option>
@@ -137,7 +158,7 @@ const SubmitForm = ({ setPage, formData, setFormData }) => {
                   {...register("referralBy")}
                   className="block w-full py-4 text-gray-700 bg-white border rounded-lg px-11 outline-none"
                 >
-                  <option value="Select...">Select...</option>
+                  <option value="Select">Select...</option>
                   <option value="Job Posts">Job Posts</option>
                   <option value="Social Media">Social Media</option>
                   <option value="Search Engine">Search Engine</option>
