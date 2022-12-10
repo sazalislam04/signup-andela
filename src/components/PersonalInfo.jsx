@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 
 const PersonalInfo = ({ setPage, setFormData, formData }) => {
   const { register, handleSubmit } = useForm();
-  const { country, email, fname, lname } = formData;
+  const { country, email, fname, lname, value } = formData;
 
   const formSubmit = (data) => {
     const { skills, experience } = data;
@@ -13,6 +13,7 @@ const PersonalInfo = ({ setPage, setFormData, formData }) => {
       lname,
       skills,
       experience,
+      value,
     };
     setFormData(newFormData);
 

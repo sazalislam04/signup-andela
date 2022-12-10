@@ -13,3 +13,18 @@ body {
   grid-template-columns: 2fr 4fr;
   grid-gap: 4rem;
 }
+html {
+  scroll-behavior: smooth;
+}
+::-webkit-scrollbar {
+  width: 0.78rem;
+  background: #eeeeee;
+}
+::-webkit-scrollbar-thumb {
+  width: 0.78rem;
+  background: #cccccc;
+  border-radius: 10px;
+}
+.PhoneInputInput:focus {
+  outline: none;
+}

@@ -1,8 +1,11 @@
 import { useState } from "react";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
 
 const SignUpInfo = ({ setPage, setFormData }) => {
   const [checkTerms, setCheckTerms] = useState("");
   const [checkPrivacy, setCheckPrivacy] = useState("");
+  const [value, setValue] = useState();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -13,26 +16,28 @@ const SignUpInfo = ({ setPage, setFormData }) => {
     const country = form.country.value;
 
     if (!fname) {
-      alert("Please enter a valid first name.");
+      return alert("Please enter a valid first name.");
     } else if (!lname) {
-      alert("Please enter a valid last name.");
+      return alert("Please enter a valid last name.");
     } else if (!email) {
-      alert("Please enter a valid email address.");
+      return alert("Please enter a valid email address.");
     } else if (country === "Select") {
-      alert("Please select a valid country from the list.");
+      return alert("Please select a valid country from the list.");
     } else if (!checkTerms || !checkPrivacy) {
       return alert("Please check the policy and terms checkboxes.");
+    } else if (!value) {
+      return alert("Please enter a valid Number.");
     } else {
       setPage((prevPage) => prevPage + 1);
     }
-    setFormData({ fname, lname, email, country });
+    setFormData({ fname, lname, email, country, value });
   };
 
   return (
     <>
       <section className="bg-white mt-16">
         <div className="w-full lg:w-11/12 mx-auto">
-          <div className="mb-14 lg:px-24 text-2xl text-center">
+          <div className="mb-14 lg:px-20 text-2xl text-center">
             <h2 className="text-xl font-normal">
               Becoming a{" "}
               <span className="text-[#58c972] italic">
@@ -64,7 +69,6 @@ const SignUpInfo = ({ setPage, setFormData }) => {
                     ></path>
                   </svg>
                 </span>
-
                 <input
                   type="text"
                   name="fname"
@@ -95,12 +99,26 @@ const SignUpInfo = ({ setPage, setFormData }) => {
                     ></path>
                   </svg>
                 </span>
-
                 <input
                   type="text"
                   name="lname"
                   className="block w-full py-4 text-gray-700 bg-white border rounded-lg px-11 outline-none"
                   placeholder=""
+                />
+              </div>
+            </div>
+            <div className="mt-4">
+              <label className="px-3 text-gray-400" htmlFor="lname">
+                Phone Number
+              </label>
+              <div className="relative flex items-center mt-4">
+                <PhoneInput
+                  international
+                  countryCallingCodeEditable={false}
+                  defaultCountry="US"
+                  value={value}
+                  onChange={setValue}
+                  className="w-full py-4 flex text-gray-700 bg-white border rounded-lg px-4 outline-none"
                 />
               </div>
             </div>

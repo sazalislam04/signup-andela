@@ -7,8 +7,10 @@ const SubmitForm = ({ setPage, formData }) => {
   const [pdf, setPdf] = useState("");
 
   const handleSubmitFormData = (data) => {
-    const { country, email, fname, lname, skills, experience } = formData;
-    const pdfData = data.pdffile[0];
+    const { country, email, fname, lname, skills, experience, value } =
+      formData;
+    const pdfData = data.pdf[0].name;
+
     const { english, referralBy, totalExperience } = data;
     const users = {
       country,
@@ -21,7 +23,9 @@ const SubmitForm = ({ setPage, formData }) => {
       referralBy,
       totalExperience,
       pdfData,
+      value,
     };
+    console.log(users);
 
     if (data.english === "Select") {
       alert("Please select your English proficiency level.");
@@ -204,20 +208,22 @@ const SubmitForm = ({ setPage, formData }) => {
                   />
                 </svg>
                 <h2 className="mx-3 text-gray-400 text-center">
-                  {" "}
-                  {pdf ? pdf : "Click to add file"}
+                  Click to add file
                 </h2>
 
                 <input
                   id="dropzone-file"
-                  {...register("pdffile")}
+                  {...register("pdf")}
                   type="file"
-                  onChange={(e) => setPdf(e.target.value)}
                   accept="application/pdf,application/vnd.ms-excel"
                   className=" hidden w-full py-4 text-gray-700 bg-white border rounded-lg px-9 outline-none"
+                  onChange={(e) => setPdf(e.target.value)}
                 />
               </label>
             </div>
+            <p className="w-full py-4 mt-4 text-gray-400 bg-white border border-gray-50 rounded-lg px-9 outline-none">
+              {pdf ? pdf.slice(12, 100) : pdf}
+            </p>
             <div className="mt-8 flex items-center gap-4 justify-center">
               <button
                 onClick={() => setPage((prevPage) => prevPage - 1)}
