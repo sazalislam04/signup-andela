@@ -1,11 +1,8 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
 const SubmitForm = ({ setPage, formData }) => {
   const { register, handleSubmit } = useForm();
-  const [pdf, setPdf] = useState("");
-
   const handleSubmitFormData = (data) => {
     const { country, email, fname, lname, skills, experience, value } =
       formData;
@@ -25,7 +22,6 @@ const SubmitForm = ({ setPage, formData }) => {
       pdfData,
       value,
     };
-    console.log(users);
 
     if (data.english === "Select") {
       alert("Please select your English proficiency level.");
@@ -33,7 +29,7 @@ const SubmitForm = ({ setPage, formData }) => {
       alert("Please select your total work experience.");
     } else if (data.totalExperience === "Select") {
       alert("Please attach your resume before submitting.");
-    } else if (!data.pdffile) {
+    } else if (!pdfData) {
       alert("Please attach your resume before submitting.");
     } else {
       setPage((prevPage) => prevPage + 1);
@@ -217,13 +213,10 @@ const SubmitForm = ({ setPage, formData }) => {
                   type="file"
                   accept="application/pdf,application/vnd.ms-excel"
                   className=" hidden w-full py-4 text-gray-700 bg-white border rounded-lg px-9 outline-none"
-                  onChange={(e) => setPdf(e.target.value)}
                 />
               </label>
             </div>
-            <p className="w-full py-4 mt-4 text-gray-400 bg-white border border-gray-50 rounded-lg px-9 outline-none">
-              {pdf ? pdf.slice(12, 100) : pdf}
-            </p>
+
             <div className="mt-8 flex items-center gap-4 justify-center">
               <button
                 onClick={() => setPage((prevPage) => prevPage - 1)}
