@@ -6,7 +6,6 @@ import SubmitForm from "./SubmitForm";
 const Form = ({ page, setPage }) => {
   // save data
   const [formData, setFormData] = useState({});
-  console.log(formData);
 
   return (
     <div className="w-full lg:w-[82%] px-3 mx-auto py-8">

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 
 const SubmitForm = ({ setPage, formData }) => {
   const { register, handleSubmit } = useForm();
@@ -9,12 +10,12 @@ const SubmitForm = ({ setPage, formData }) => {
     const { country, email, fname, lname, skills, experience } = formData;
     const pdfData = data.pdffile[0];
     const { english, referralBy, totalExperience } = data;
-    const storedData = {
+    const users = {
       country,
       email,
       fname,
       lname,
-      skills,
+      role: skills,
       experience,
       english,
       referralBy,
@@ -30,22 +31,23 @@ const SubmitForm = ({ setPage, formData }) => {
       alert("Please attach your resume before submitting.");
     } else if (!data.pdffile) {
       alert("Please attach your resume before submitting.");
-    } else {
-      alert("Congratulations! Form Submited Successed");
     }
 
-    // stored data in database
-    // fetch("http://localhost:5000/form-data", {
-    //   method: "PUT",
-    //   headers: {
-    //     "content-type": "application/json",
-    //   },
-    //   body: JSON.stringify(storedData),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => console.log(data))
-    //   .catch((error) => console.log(error));
-    console.log(storedData);
+    // stored users in database
+    fetch(`https://signup-andela-server-sazalislam04.onrender.com/users`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(users),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          toast.success("Congratulations !! Your Form Submited");
+        }
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
