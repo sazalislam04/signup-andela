@@ -31,6 +31,8 @@ const SubmitForm = ({ setPage, formData }) => {
       alert("Please attach your resume before submitting.");
     } else if (!data.pdffile) {
       alert("Please attach your resume before submitting.");
+    } else {
+      setPage((prevPage) => prevPage + 1);
     }
 
     // stored users in database
