@@ -11,13 +11,15 @@ const Dashboard = () => {
     <>
       <div className="flex flex-no-wrap">
         <div
-          className={`absolute sm:max-h-screen sm:relative ${
-            page === 4 ? "shadow-none pt-0" : "bg-[#173c40]"
-          } shadow md:h-full flex-col pt-16 w-96 lg:w-[40%] justify-between hidden sm:flex`}
+          className={`absolute sm:min-h-screen sm:relative ${
+            page === 4
+              ? "shadow-none pt-0"
+              : "bg-[#173c40] shadow md:h-full flex-col pt-16 w-96 lg:w-[40%]"
+          }  justify-between hidden sm:flex`}
         >
           {page === 4 && (
             <>
-              <div className="">
+              <div className="max-h-screen">
                 <img className="h-[100vh] w-72" src={sidebar} alt="" />
               </div>
             </>

@@ -7,17 +7,17 @@ const ConfirmMessage = () => {
     <>
       <div className="w-full lg:w-1/2 mx-auto">
         <img
-          className="w-32 lg:left-1/2 lg:-translate-x-14 mt-5 mx-auto mb-10"
+          className="w-32 lg:left-1/2 lg:-translate-x-2 mt-5 mx-auto mb-10"
           src={logo}
           alt=""
         />
         <img
-          className="h-48 w-48 lg:left-1/2 lg:-translate-x-14 mx-auto object-cover"
+          className="h-48 w-48 lg:left-1/2 lg:-translate-x-2 mx-auto object-cover"
           src={email}
           alt=""
         />
       </div>
-      <div className="w-full lg:w-9/12 lg:left-1/2 lg:-translate-x-14 mx-auto text-center mt-8">
+      <div className="w-full lg:w-9/12 lg:left-1/2 lg:-translate-x-2 mx-auto text-center mt-8">
         <h2 className="text-xl">
           You're one step closer to jumpstarting your career.
         </h2>
